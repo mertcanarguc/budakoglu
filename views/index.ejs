@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>BUDAKOĞLU SİPARİŞ YÖNETİMİ</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.css" rel="stylesheet">
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote.js"></script>
+  </head>
+  <body>
+    <div class="jumbotron text-center">
+      <h1>BUDAKOĞLU SİPARİŞ YÖNETİMİ</h1>
+    </div>
+    
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <h1 class="text-center">FİRMA MAİLİ EKLE</h1>
+          <form action="/mailekle" method="post">
+            <div class="form-group">
+              <input type="text" name="firma" class="form-control" placeholder="Firma Adı" required>
+            </div>
+            <div class="form-group">
+              <input type="mail" name="mail" class="form-control" placeholder="Firma Maili" required>
+            </div>
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary pull-right">Ekle</button>
+            </div>
+          </form>
+          <table class="table table-responsive-sm">
+            <thead>
+              <tr>
+                <th>Firma Adı</th>
+                <th>Firma Maili</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% mail.forEach( function(data) { %>
+              <tr>
+                <td><%= data.firma %></td>
+                <td><%= data.mail %></td>
+                <td><a href="/mailsil/<%= data._id %>">SİL</a></td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-md-8">
+          <section class="panel">
+            <div class="panel-body">
+              <form action="/deneme" method="post">
+                <div class="form-group">
+                  <div class="col-md-12">
+                    <input type="hidden" name="snumber" value="<%= sira.sira+1 %>">
+                    <input type="hidden" name="gonderen" value="BUDAKĞOLU">
+                    Kime : <select class="form-control" name="mail">
+                      <% mail.forEach( function(data) { %>
+                      <option value="<%= data.mail %>"><%= data.firma %></option>
+                      <% }) %>
+                    </select>
+                    Konu : <input type="text" name="subject" class="form-control" placeholder="Konu" value="SİPARİŞ TALEBİ : <%=sira.sira+1 %> ">
+                    <textarea name="icerik" class="summernote" data-plugin-summernote data-plugin-options='{ "height": 200, "codemirror": { "theme": "ambiance" } }' required>
+                    <h2>Sipariş Bilgileri</h2>
+                    <table style="width: 80%">
+                      <tr>
+                        <th>SİPARİŞ NO</th>
+                        <th>FİRMA</th>
+                        <th>TARİH</th>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid red"><%= sira.sira+1 %></td>
+                        <td style="border:1px solid red">BUDAKOĞLU CONCEPT</td>
+                        <td style="border:1px solid red"></td>
+                      </tr>
+                    </table>
+                    <hr>
+                    <table style="width:80%">
+                      <tr>
+                        <th>Adet</th>
+                        <th>Ürün</th>
+                        <th>Özellikleri</th>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid red"></td>
+                        <td style="border:1px solid red"></td>
+                        <td style="border:1px solid red"></td>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid red"></td>
+                        <td style="border:1px solid red"></td>
+                        <td style="border:1px solid red"></td>
+                      </tr>
+                      <tr>
+                        <td style="border:1px solid red"></td>
+                        <td style="border:1px solid red"></td>
+                        <td style="border:1px solid red"></td>
+                      </tr>
+                    </table>
+                    <hr>
+              <br>
+              <h5>MÜŞTERİ ADI SOYADI :</h5>
+              <h5>ÜRÜN GÖNDERİMİNDE MÜŞTERİ ADI SOYADI YAZILMASI RİCA OLUNUR</h5>
+              <h5>SİPARİŞ MAİLİ ALINCA "SİPARİŞİ ONAYLA" BUTONUNA BASINIZ</h5>
+              <h5>OLGUN NAKLİYE İLE ÇALIŞMAKTAYIZ</h5>
+              <h5>MNG KARGO İLE ANLAŞMALI ÇALIŞMAKTAYIZ (211921574)</h5>
+              <br>
+              <p>İyi çalışmalar</p>
+              <p>Budakoğlu Concept</p>
+              <p>LÜTFİ ADAL</p>
+              <p>Ömer Nasuhi Bilmen Mah. Kombina Cad.</p>
+              <p>Park Rezidans Sitesi A / 15 Yakutiye - Erzurum</p>
+              <p>Tel : 0 (442) 422 05 05</p>
+              <p>Cep : 0 (505) 265 84 04</p>
+              <p><a href="www.budakoglu.com.tr">www.budakoglu.com.tr</a></p>
+              <a id="tirt" href="http://budakoglu.webmasteradam.com/onayla/<%= sira.sira+1 %>" style="margin-left: 60%; color:white; background-color: blue; padding: 10px">SİPARİŞİ ONAYLA</a>
+              </textarea>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <button type="submit" class="btn btn-primary pull-right">SİPARİŞİ GÖNDER</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-8">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Sipariş Numarası</th>
+            <th>Alıcı</th>
+            <th> * * * * </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% siparis.forEach( function(data) { %>
+          <tr>
+            <td><%= data.snumber %></td>
+            <td><%= data.mail %></td>
+            <td><a href="/siparis/<%= data._id %>">İNCELE</a></td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+$(document).ready(function() {
+$('.summernote').summernote();
+});
+</script>
