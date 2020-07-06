@@ -6,7 +6,7 @@ const Mail = require("../models/mail")
 const async = require("async")
 
 router.get('/', async function(req, res, next) {
-	let sira = await Sira.findOne({"_id":"5f02e966f9658d1329c0fef4"})
+	let sira = await Sira.findOne({"_id":"5f02eccc2b65ce14daaff033"})
 	//let sira = await Sira.findOne({"_id":"5e74980b62bc1d2e81c66354"})
 	let mail = await Mail.find({ })
 	let siparis = await Siparis.find({})
@@ -19,7 +19,7 @@ router.get('/', async function(req, res, next) {
 })
 
 router.get("/silbakalim",async function (req,res,next) {
-	let sira = await Sira.findOne({"_id":"5f02e966f9658d1329c0fef4"})
+	let sira = await Sira.findOne({"_id":"5f02eccc2b65ce14daaff033"})
 	//let sira = await Sira.findOne({"_id":"5e74980b62bc1d2e81c66354"})
 	Siparis.deleteMany({},(err,data)=>{
 		if (!err) {
@@ -44,7 +44,7 @@ router.get("/siparis/:id",async function (req,res,next) {
 
 router.post("/deneme",async function (req,res,next) {
 	const nodemailer = require("nodemailer")
-	let sira = await Sira.findById({"_id":"5f02e966f9658d1329c0fef4"})
+	let sira = await Sira.findById({"_id":"5f02eccc2b65ce14daaff033"})
 	//let sira = await Sira.findById({"_id":"5db4077a401e2b04d87dbf17"})
 
 	const transporter = nodemailer.createTransport({
